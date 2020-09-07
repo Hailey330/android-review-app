@@ -13,6 +13,7 @@ import com.cos.review.adapter.ProductAdapter;
 import com.cos.review.adapter.SearchKeywordAdapter;
 import com.cos.review.model.Product;
 import com.cos.review.model.SearchKeyword;
+import com.cos.review.viewmodel.ProductViewModel;
 import com.cos.review.viewmodel.SearchKeywordViewModel;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private SearchKeywordAdapter searchKeywordAdapter;
     private ProductAdapter productAdapter;
     private SearchKeywordViewModel searchKeywordViewModel;
+    private ProductViewModel productViewModel;
 
 
     @Override
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         initObject();
         initSetting();
-        // sampleData();
+//      sampleData();
         initData();
     }
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         productAdapter = new ProductAdapter();
 
         searchKeywordViewModel = ViewModelProviders.of(mContext).get(SearchKeywordViewModel.class);
+        productViewModel = ViewModelProviders.of(mContext).get(ProductViewModel.class);
     }
 
     private void initSetting() {
@@ -63,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(List<SearchKeyword> searchKeywords) {
                 searchKeywordAdapter.setSearchKeywords(searchKeywords);
                 searchKeywordAdapter.notifyDataSetChanged();
+            }
+        });
+
+        productViewModel.데이터등록();
+        productViewModel.구독().observe(mContext, new Observer<List<Product>>() {
+            @Override
+            public void onChanged(List<Product> products) {
+                productAdapter.setProducts(products);
+                productAdapter.notifyDataSetChanged();
             }
         });
     }
