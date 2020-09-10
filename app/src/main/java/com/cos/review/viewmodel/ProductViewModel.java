@@ -21,7 +21,7 @@ public class ProductViewModel extends AndroidViewModel {
 
     private static final String TAG = "ProductViewModel";
 
-    private MutableLiveData<List<Product>> mtProducts = new MutableLiveData<>();
+    private MutableLiveData<List<Product>> mtProduct = new MutableLiveData<>();
 
     public ProductViewModel(@NonNull Application application) {
         super(application);
@@ -29,16 +29,17 @@ public class ProductViewModel extends AndroidViewModel {
 
     // 데이터 변경 감지하는 옵서버
     public MutableLiveData<List<Product>> 구독() {
-        return mtProducts;
+        return mtProduct;
     }
 
-    public void 데이터등록() {
-        Call<List<Product>> call = RetrofitService.retrofit.create(RetrofitService.class).callProducts();
+    public void changeData(int keywordId) {
+        Log.d(TAG, "changeData: changeData 실행 ! ");
+        Call<List<Product>> call = RetrofitService.retrofit.create(RetrofitService.class).callProductByKeywordId(keywordId);
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 List<Product> products = response.body();
-                mtProducts.setValue(products);
+                mtProduct.setValue(products);
             }
 
             @Override
@@ -46,6 +47,23 @@ public class ProductViewModel extends AndroidViewModel {
                 Log.d(TAG, "onFailure: Product 통신 실패");
             }
         });
+    }
 
+    public void 데이터등록() {
+        Call<List<Product>> call =
+                RetrofitService.retrofit.create(RetrofitService.class).callProducts();
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                Log.d(TAG, "ProductViewModel: 통신성공");
+                List<Product> products = response.body();
+                mtProduct.setValue(products);
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Log.d(TAG, "ProductViewModel: 통신 실패");
+            }
+        });
     }
 }

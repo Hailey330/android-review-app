@@ -5,6 +5,9 @@
         <variable
             name="searchKeyword"
             type="com.cos.review.model.SearchKeyword" />
+        <variable
+            name="productViewModel"
+            type="com.cos.review.viewmodel.ProductViewModel" />
     </data>
 
     <LinearLayout
@@ -19,7 +22,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="15dp"
-            android:text="@{searchKeyword.keyword}" />
+            android:text="@{searchKeyword.keyword}"
+            android:onClick="@{() -> productViewModel.changeData(searchKeyword.id)}"/>
 
     </LinearLayout>
 </layout>

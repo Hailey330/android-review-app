@@ -13,13 +13,20 @@ import com.cos.review.R;
 import com.cos.review.databinding.MenuItemBinding;
 import com.cos.review.model.Product;
 import com.cos.review.model.SearchKeyword;
+import com.cos.review.viewmodel.ProductViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchKeywordAdapter extends RecyclerView.Adapter<SearchKeywordAdapter.SearchKeywordHolder> {
 
+    private ProductViewModel productViewModel;
     private List<SearchKeyword> searchKeywords = new ArrayList<>();
+    public SearchKeywordAdapter() { }
+    public SearchKeywordAdapter(ProductViewModel productViewModel) {
+        this.productViewModel = productViewModel;
+    }
+
 
     // 데이터 한번에 넣어주는 함수
     public void setSearchKeywords(List<SearchKeyword> searchKeywords) {
@@ -55,6 +62,7 @@ public class SearchKeywordAdapter extends RecyclerView.Adapter<SearchKeywordAdap
     public void onBindViewHolder(@NonNull SearchKeywordHolder holder, int position) {
         SearchKeyword searchKeyword = searchKeywords.get(position);
         holder.menuItemBinding.setSearchKeyword(searchKeyword);
+        holder.menuItemBinding.setProductViewModel(productViewModel);
     }
 
     @Override

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cos.review.MainActivity;
 import com.cos.review.R;
 import com.cos.review.databinding.ContainerItemBinding;
 import com.cos.review.model.Product;
@@ -18,7 +19,13 @@ import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
 
+    private static final String TAG = "ProductAdapter";
     private List<Product> products = new ArrayList<>();
+    private MainActivity mContext;
+
+    public ProductAdapter(MainActivity mContext) {
+        this.mContext = mContext;
+    }
 
     // 데이터 한번에 넣어주는 함수
     public void setProducts(List<Product> products) {
@@ -54,6 +61,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
         Product product = products.get(position);
         holder.containerItemBinding.setProduct(product);
+        holder.containerItemBinding.setMainActivity(mContext);
     }
 
     @Override

@@ -6,9 +6,13 @@
         <variable
             name="product"
             type="com.cos.review.model.Product" />
+        <variable
+            name="mainActivity"
+            type="com.cos.review.MainActivity" />
     </data>
 
     <RelativeLayout
+        android:onClick="@{()-> mainActivity.hello(product.blogUrl)}"
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:background="#FFFFFF">

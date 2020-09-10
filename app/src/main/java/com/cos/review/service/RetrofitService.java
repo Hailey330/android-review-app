@@ -19,9 +19,9 @@ public interface RetrofitService {
     Call<List<Product>> callProducts();
 
     @GET("/product/{keyword}")
-    Call<List<Product>> callProducts(@Path("keyword") String keyword);
+    Call<List<Product>> callProductByKeywordId(@Path("keyword") int keywordId);
 
-    public static final Retrofit retrofit = new Retrofit.Builder()
+    Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://192.168.0.61:8080")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
