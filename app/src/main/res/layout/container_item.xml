@@ -14,8 +14,9 @@
     <RelativeLayout
         android:onClick="@{()-> mainActivity.hello(product.blogUrl)}"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="115dp"
         android:background="#FFFFFF">
+
 
         <ImageView
             android:id="@+id/iv_thumnail"
@@ -38,9 +39,10 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:text="@{product.title}"
+                android:textColor="#1B1B1B"
                 android:textSize="15sp" />
 
             <TextView
@@ -49,9 +51,11 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:text="@{product.day}"
+                android:textAlignment="textEnd"
+                android:textColor="#353535"
                 android:textSize="13sp" />
 
         </LinearLayout>
@@ -59,8 +63,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.6dp"
-
-            android:background="#F0888888"
+            android:background="#C1E6CF"
             android:layout_below="@+id/list_layout" />
 
     </RelativeLayout>
